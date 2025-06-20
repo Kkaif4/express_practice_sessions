@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.send(`hello I'm root route`);
 });
 
-app.get('/create/file/ws/:fileName', (req, res) => {
+app.get('/create/file/Sync/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   fs.writeFileSync(
     `./${fileName}.txt`,
@@ -26,7 +26,7 @@ app.get('/create/file/ws/:fileName', (req, res) => {
   res.json({ message: 'file created successfully' });
 });
 
-app.get('/create/file/wts/:fileName', (req, res) => {
+app.get('/create/file/Async/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   fs.writeFile(
     `./${fileName}.txt`,
@@ -40,7 +40,7 @@ app.get('/create/file/wts/:fileName', (req, res) => {
   res.send('file created');
 });
 
-app.get('/read/file/ws/:fileName', (req, res) => {
+app.get('/read/file/Sync/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   try {
     const fileData = fs.readFileSync(`./${fileName}.txt`, 'utf-8');
@@ -50,7 +50,7 @@ app.get('/read/file/ws/:fileName', (req, res) => {
   }
 });
 
-app.get('/read/file/wts/:fileName', (req, res) => {
+app.get('/read/file/Async/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   try {
     fs.readFile(`./${fileName}.txt`, 'utf-8', (err, data) => {
@@ -61,7 +61,7 @@ app.get('/read/file/wts/:fileName', (req, res) => {
   }
 });
 
-app.get('/write/file/ws/:fileName', (req, res) => {
+app.get('/write/file/Sync/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   try {
     fs.appendFileSync(`./${fileName}.txt`, 'new data in sync\n');
@@ -76,7 +76,7 @@ app.get('/write/file/ws/:fileName', (req, res) => {
   }
 });
 
-app.get('/write/file/wts/:fileName', (req, res) => {
+app.get('/write/file/Async/:fileName', (req, res) => {
   const fileName = req.params.fileName;
   try {
     fs.appendFile(`./${fileName}.txt`, 'new data without sync\n', (err) => {
