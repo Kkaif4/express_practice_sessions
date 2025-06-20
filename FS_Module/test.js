@@ -1,18 +1,29 @@
-import express from 'express';
-import status from 'express-status-monitor';
-const app = express();
+//! Streams
+import fs, { write } from 'fs';
 
-// streams --> 400mb --> read
-// variable --> server 400mb
+//? 4gb --> 4g --> server (4gb)
+//? 4gb -->  chunk --> server
 
-app.use(status());
-
-app.get('/one', (req, res) => {
-  res.send(`hello I'm root route`);
+const readStream = fs.createReadStream('./Data.txt', 'utf-8');
+readStream.on('data', (chunk) => console.log(chunk));
+readStream.on('end', () => {
+  console.log('finished');
 });
 
+// append new data to existing file
+const writeStream = fs.createWriteStream('./output.txt', { flags: 'a' });
 
+writeStream.write('\nhello im old data');
 
-app.listen(3000, () => {
-  console.log('server is running fine');
-});
+writeStream.end();
+
+//? pipe
+// file --> receive in variable --> new file
+// file --> pipe -- > new file
+readStream.pipe(writeStream);
+
+// streams
+// stream read
+// stream write
+// append file using streams
+// pipe line
