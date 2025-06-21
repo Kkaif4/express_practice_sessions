@@ -21,49 +21,43 @@
 import express from 'express';
 import fs from 'fs';
 import { performance } from 'perf_hooks';
+import createLog from './middleware/LogMiddleware.js';
+
+function setLog(log) {
+  const writeStream = fs.createWriteStream('./logger.jsonl', { flags: 'a' });
+  const success = writeStream.write(JSON.stringify(log) + '\n');
+  if (!success) {
+    console.warn('Backpressure: Stream buffer full');
+  }
+}
 
 const app = express();
-const writeStream = fs.createWriteStream('./logger.jsonl', { flags: 'a' });
+app.use(createLog);
 
 app.get('/', (req, res) => {
   const start = performance.now();
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
   let duration = 0;
   const message = { msg: 'Root path visited: Hello im root' };
-
+  const { date, time } = req.timestamp;
   res.json(message);
   res.on('finish', () => {
     const end = performance.now();
     duration = end - start;
   });
   let jsonLog = {
-    message: message.msg,
-    date: `${day}/${month + 1}/${year}`,
-    time: `${h}:${m}:${s}`,
-    responseTime: `${duration} ms`,
+    log: message.msg,
+    date,
+    time,
+    requestTime: duration,
   };
-  writeStream.write(JSON.stringify(jsonLog) + '\n');
+  setLog(jsonLog);
 });
 
 app.get('/create/file/Sync/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
   const fileName = req.params.fileName;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
+  const { date, time } = req.timestamp;
   const message = {};
   let jsonLog = {};
   try {
@@ -72,25 +66,20 @@ app.get('/create/file/Sync/:fileName', (req, res) => {
       'I Am new file,created by using Sync function'
     );
     message.msg = `${fileName}.txt file created(Sync)`;
-
-    res.json(jsonLog);
+    res.json(message);
     res.on('finish', () => {
       const end = performance.now();
       duration = end - start;
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration}`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   } catch (err) {
     message.msg = 'error creating file (SYNC)';
-
     res.json(jsonLog);
     res.on('end', () => {
       const end = performance.now();
@@ -102,20 +91,14 @@ app.get('/create/file/Sync/:fileName', (req, res) => {
       time: `${h}:${m}:${s}`,
       requestTime: `${duration}`,
     };
+    setLog(jsonLog);
   }
 });
 
 app.get('/create/file/Async/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
+  const { date, time } = req.timestamp;
   const fileName = req.params.fileName;
   const message = {};
   let jsonLog = {};
@@ -131,15 +114,12 @@ app.get('/create/file/Async/:fileName', (req, res) => {
             duration = end - start;
             jsonLog = {
               message: message.msg,
-              date: `${day}/${month + 1}/${year}`,
-              time: `${h}:${m}:${s}`,
+              date,
+              time,
               requestTime: `${duration}`,
             };
           });
-          const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-          if (!success) {
-            console.warn('Backpressure: Stream buffer full');
-          }
+          setLog(jsonLog);
           return res.json(message);
         }
         message.msg = 'file created (Async)';
@@ -149,15 +129,12 @@ app.get('/create/file/Async/:fileName', (req, res) => {
         });
         jsonLog = {
           message: message.msg,
-          date: `${day}/${month + 1}/${year}`,
-          time: `${h}:${m}:${s}`,
+          date,
+          time,
           requestTime: duration,
         };
         res.json(jsonLog);
-        const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-        if (!success) {
-          console.warn('Backpressure: Stream buffer full');
-        }
+        setLog(jsonLog);
       }
     );
   } catch (err) {
@@ -169,28 +146,18 @@ app.get('/create/file/Async/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/read/file/Sync/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
+  const { date, time } = req.timestamp;
   const message = {};
   let jsonLog = {};
   const fileName = req.params.fileName;
@@ -205,14 +172,11 @@ app.get('/read/file/Sync/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   } catch (err) {
     message.msg = 'internal server error in reading file (Sync)';
     res.json(message);
@@ -222,28 +186,18 @@ app.get('/read/file/Sync/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/read/file/Async/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
+  const { date, time } = req.timestamp;
   const message = {};
   let jsonLog = {};
   const fileName = req.params.fileName;
@@ -258,14 +212,11 @@ app.get('/read/file/Async/:fileName', (req, res) => {
         });
         jsonLog = {
           message: message.msg,
-          date: `${day}/${month + 1}/${year}`,
-          time: `${h}:${m}:${s}`,
+          date,
+          time,
           requestTime: `${duration} ms`,
         };
-        const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-        if (!success) {
-          console.warn('Backpressure: Stream buffer full');
-        }
+        setLog(jsonLog);
       }
       message.msg = `reading file ${fileName}.txt (ASYNC) `;
       res.json({ data, message });
@@ -275,15 +226,11 @@ app.get('/read/file/Async/:fileName', (req, res) => {
       });
       jsonLog = {
         message: message.msg,
-        date: `${day}/${month + 1}/${year}`,
-        time: `${h}:${m}:${s}`,
+        date,
+        time,
         requestTime: `${duration} ms`,
       };
-
-      const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-      if (!success) {
-        console.warn('Backpressure: Stream buffer full');
-      }
+      setLog(jsonLog);
     });
   } catch (err) {
     message.msg = `internal server error in reading ${fileName}.txt file (ASYNC)`;
@@ -294,28 +241,17 @@ app.get('/read/file/Async/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/update/file/Sync/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
   const message = {};
   let jsonLog = {};
   const fileName = req.params.fileName;
@@ -330,14 +266,11 @@ app.get('/update/file/Sync/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   } catch (err) {
     message.msg = `error in updating file ${fileName}.txt file(Sync)`;
     res.json(message);
@@ -347,28 +280,17 @@ app.get('/update/file/Sync/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/update/file/Async/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
   const message = {};
   let jsonLog = {};
   const fileName = req.params.fileName;
@@ -383,14 +305,11 @@ app.get('/update/file/Async/:fileName', (req, res) => {
         });
         jsonLog = {
           message: message.msg,
-          date: `${day}/${month + 1}/${year}`,
-          time: `${h}:${m}:${s}`,
+          date,
+          time,
           requestTime: `${duration} ms`,
         };
-        const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-        if (!success) {
-          console.warn('Backpressure: Stream buffer full');
-        }
+        setLog(jsonLog);
         return res.json(message);
       }
     });
@@ -402,14 +321,11 @@ app.get('/update/file/Async/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   } catch (err) {
     message.msg = `internal server error in writing file (ASYNC)`;
     res.json(message);
@@ -419,30 +335,20 @@ app.get('/update/file/Async/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/delete/:fileName', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
   const message = {};
   let jsonLog = {};
+  const { date, time } = req.timestamp;
   const fileName = req.params.fileName;
   try {
     fs.unlinkSync(`./${fileName}.txt`);
@@ -454,14 +360,11 @@ app.get('/delete/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   } catch (err) {
     message.msg = 'Error deleting File';
     res.json(message);
@@ -471,28 +374,18 @@ app.get('/delete/:fileName', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   }
 });
 
 app.get('/stream/logs', (req, res) => {
   const start = performance.now();
   let duration = 0;
-  const time = Date.now();
-  const date = new Date(time);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const h = date.getHours();
-  const m = date.getMinutes();
-  const s = date.getSeconds();
+  const { date, time } = req.timestamp;
   const message = {};
   let jsonLog = {};
   const fileName = 'logger.jsonl';
@@ -501,13 +394,10 @@ app.get('/stream/logs', (req, res) => {
     message.msg = 'reading file (Streams)';
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   });
   readStream.on('data', (chunk) => res.send(chunk));
   readStream.on('end', () => {
@@ -518,14 +408,11 @@ app.get('/stream/logs', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
     res.end();
   });
   readStream.on('error', () => {
@@ -537,14 +424,11 @@ app.get('/stream/logs', (req, res) => {
     });
     jsonLog = {
       message: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
-    const success = writeStream.write(JSON.stringify(jsonLog) + '\n');
-    if (!success) {
-      console.warn('Backpressure: Stream buffer full');
-    }
+    setLog(jsonLog);
   });
 });
 

@@ -12,3 +12,8 @@
 {"message":"reading file crazy.txt (Sync) ","date":"21/6/2025","time":"17:50:17"}
 {"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:14:16","responseTime":"0 ms"}
 {"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:15:35","responseTime":"0 ms"}
+{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:30:26","responseTime":"0 ms"}
+{"log":"Root path visited: Hello im root","date":"21/6/2025","time":"23:48:4","requestTime":0}
+{"log":"Root path visited: Hello im root","date":"22/6/2025","time":"0:7:19","requestTime":0}
+{"message":"test.txt file created(Sync)","date":"22/6/2025","time":"0:24:44","requestTime":"0"}
+{"message":"sage.txt file created(Sync)","date":"22/6/2025","time":"0:26:0","requestTime":"0"}
