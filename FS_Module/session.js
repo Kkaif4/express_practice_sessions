@@ -5,10 +5,10 @@ import fs, { write } from 'fs';
 //? 4gb -->  chunk --> server
 
 const readStream = fs.createReadStream('./Data.txt', 'utf-8');
-readStream.on('data', (chunk) => console.log(chunk));
-readStream.on('end', () => {
-  console.log('finished');
-});
+// readStream.on('data', (chunk) => console.log(chunk));
+// readStream.on('end', () => {
+//   console.log('finished');
+// });
 
 // append new data to existing file
 const writeStream = fs.createWriteStream('./output.txt', { flags: 'a' });
