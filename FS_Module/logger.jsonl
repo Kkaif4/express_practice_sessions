@@ -10,3 +10,5 @@
 {"message":"crazy.txt file created(Sync)","date":"21/6/2025","time":"17:47:30"}
 {"message":"file created (Async)","date":"21/6/2025","time":"17:48:41"}
 {"message":"reading file crazy.txt (Sync) ","date":"21/6/2025","time":"17:50:17"}
+{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:14:16","responseTime":"0 ms"}
+{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:15:35","responseTime":"0 ms"}
