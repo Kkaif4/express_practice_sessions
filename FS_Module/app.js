@@ -18,7 +18,7 @@
 *-create logger api which will send logger file to server in response.
 */
 
-import express from 'express';
+import express, { response } from 'express';
 import fs from 'fs';
 import { performance } from 'perf_hooks';
 import createLog from './middleware/LogMiddleware.js';
@@ -72,10 +72,10 @@ app.get('/create/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
-      requestTime: `${duration}`,
+      requestTime: `${duration} ms`,
     };
     setLog(jsonLog);
   } catch (err) {
@@ -86,10 +86,10 @@ app.get('/create/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date: `${day}/${month + 1}/${year}`,
       time: `${h}:${m}:${s}`,
-      requestTime: `${duration}`,
+      requestTime: `${duration} ms`,
     };
     setLog(jsonLog);
   }
@@ -113,10 +113,10 @@ app.get('/create/file/Async/:fileName', (req, res) => {
             const end = performance.now();
             duration = end - start;
             jsonLog = {
-              message: message.msg,
+              log: message.msg,
               date,
               time,
-              requestTime: `${duration}`,
+              requestTime: `${duration} ms`,
             };
           });
           setLog(jsonLog);
@@ -128,10 +128,10 @@ app.get('/create/file/Async/:fileName', (req, res) => {
           duration = end - start;
         });
         jsonLog = {
-          message: message.msg,
+          log: message.msg,
           date,
           time,
-          requestTime: duration,
+          requestTime: `${duration} ms`,
         };
         res.json(jsonLog);
         setLog(jsonLog);
@@ -145,7 +145,7 @@ app.get('/create/file/Async/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -171,7 +171,7 @@ app.get('/read/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -185,7 +185,7 @@ app.get('/read/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -211,7 +211,7 @@ app.get('/read/file/Async/:fileName', (req, res) => {
           duration = end - start;
         });
         jsonLog = {
-          message: message.msg,
+          log: message.msg,
           date,
           time,
           requestTime: `${duration} ms`,
@@ -225,7 +225,7 @@ app.get('/read/file/Async/:fileName', (req, res) => {
         duration = end - start;
       });
       jsonLog = {
-        message: message.msg,
+        log: message.msg,
         date,
         time,
         requestTime: `${duration} ms`,
@@ -240,7 +240,7 @@ app.get('/read/file/Async/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -265,7 +265,7 @@ app.get('/update/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -279,7 +279,7 @@ app.get('/update/file/Sync/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -304,7 +304,7 @@ app.get('/update/file/Async/:fileName', (req, res) => {
           duration = end - start;
         });
         jsonLog = {
-          message: message.msg,
+          log: message.msg,
           date,
           time,
           requestTime: `${duration} ms`,
@@ -320,7 +320,7 @@ app.get('/update/file/Async/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -334,7 +334,7 @@ app.get('/update/file/Async/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -358,7 +358,7 @@ app.get('/delete/:fileName', (req, res) => {
       const end = performance.now();
       duration = end - start;
     });
-    jsonLog = {
+    log = {
       message: message.msg,
       date,
       time,
@@ -373,7 +373,7 @@ app.get('/delete/:fileName', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -393,9 +393,10 @@ app.get('/stream/logs', (req, res) => {
   readStream.on('open', () => {
     message.msg = 'reading file (Streams)';
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
+      responseTime: 'file reading in process...',
     };
     setLog(jsonLog);
   });
@@ -407,7 +408,7 @@ app.get('/stream/logs', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
@@ -423,7 +424,7 @@ app.get('/stream/logs', (req, res) => {
       duration = end - start;
     });
     jsonLog = {
-      message: message.msg,
+      log: message.msg,
       date,
       time,
       requestTime: `${duration} ms`,
