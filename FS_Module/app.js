@@ -87,8 +87,8 @@ app.get('/create/file/Sync/:fileName', (req, res) => {
     });
     jsonLog = {
       log: message.msg,
-      date: `${day}/${month + 1}/${year}`,
-      time: `${h}:${m}:${s}`,
+      date,
+      time,
       requestTime: `${duration} ms`,
     };
     setLog(jsonLog);

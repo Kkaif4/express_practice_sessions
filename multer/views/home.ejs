@@ -6,9 +6,37 @@
     <title>Multer and Cors session</title>
   </head>
   <body>
-    <h1>hello this is root route</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <h1>Upload Single File :</h1>
+    <form action="/upload/single" method="post" enctype="multipart/form-data">
+      <label for="pfp">Profile Picture</label>
       <input type="file" name="pfp" />
+      <button type="submit">Upload</button>
+    </form>
+    <br />
+
+
+
+
+    <h1>Upload Array Files :</h1>
+    <form action="/upload/array" method="post" enctype="multipart/form-data">
+      <label for="photos">Photos</label>
+      <input type="file" name="photos" multiple />
+      <button type="submit">Upload</button>
+    </form>
+    <br />
+
+
+
+
+
+    <h1>Upload Files using Fields :</h1>
+    <form action="/upload/fields" method="post" enctype="multipart/form-data">
+      <label for="pfp">Profile Picture</label>
+      <input type="file" name="pfp" />
+
+      <label for="photos">Photos</label>
+      <input type="file" name="photos" multiple />
+      
       <button type="submit">Upload</button>
     </form>
   </body>

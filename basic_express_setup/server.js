@@ -1,4 +1,10 @@
 import express from 'express';
+import {
+  validationBody,
+  validationParams,
+  validationQuery,
+} from './middleware/validation.js';
+
 const app = express();
 
 //middleware for using json data
@@ -15,20 +21,19 @@ app.get('/', (req, res) => {
   res.send('hello');
 });
 
-app.get('/user', (req, res) => {
-  const { user, city, age } = req.query;
-  console.log(user, age, city);
-  res.json({ user, age, city });
+app.get('/user', validationQuery, (req, res) => {
+  const { name, city, age } = req.query;
+  res.json({ message: 'success', name, age, city });
 });
 
-app.get('/:user/:city', (req, res) => {
-  const { user, city } = req.params;
-  res.json({ user, city });
+app.get('/:name/:age/:city', validationParams, (req, res) => {
+  const { name, age, city } = req.params;
+  res.json({ message: 'success', name, age, city });
 });
 
 app.post('/new', (req, res) => {
-  const { name, age } = req.body;
-  res.status(200).json({ name, age });
+  const { name, age, city } = req.body;
+  res.status(200).json({ message: 'success', name, age, city });
 });
 
 const Name = [
@@ -37,7 +42,7 @@ const Name = [
 ];
 
 // put, patch, delete
-app.put('/update', (req, res) => {
+app.put('/update', validationBody, (req, res) => {
   const { user, age } = req.body;
   Name.name = user;
   Name.age = age;
@@ -50,7 +55,7 @@ app.patch('/update/name', (req, res) => {
   res.json(Name);
 });
 
-app.delete('/:user/delete', (req, res) => {
+app.delete('/:user/delete', (req, res, next) => {
   const user = req.params.user;
   const found = Name.reduce((acu, c) => {
     if (c.name === user) {
@@ -61,9 +66,16 @@ app.delete('/:user/delete', (req, res) => {
   if (found) {
     Name.splice(found, 1);
     return res.json(Name);
-  } else {
-    return res.json({ message: 'sorry bad request' });
   }
+  res.json({ message: 'user not found' });
+});
+
+app.use((err, req, res, next) => {
+  console.error('error handler:', err.message); // you can log this to a file too
+  res.status(err.status || 500).json({
+    error: true,
+    message: err.message || 'Something went wrong',
+  });
 });
 
 app.use((req, res) => {
