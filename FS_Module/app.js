@@ -18,179 +18,81 @@
 *-create logger api which will send logger file to server in response.
 */
 
-import express, { response } from 'express';
+import express from 'express';
 import fs from 'fs';
 import { performance } from 'perf_hooks';
-import createLog from './middleware/LogMiddleware.js';
-
-function setLog(log) {
-  const writeStream = fs.createWriteStream('./logger.jsonl', { flags: 'a' });
-  const success = writeStream.write(JSON.stringify(log) + '\n');
-  if (!success) {
-    console.warn('Backpressure: Stream buffer full');
-  }
-}
+import { setTime } from './middleware/setTime.js';
+import { setLog } from './utils/setLog.js';
+import { validateFileName } from './middleware/validate.js';
+import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
-app.use(createLog);
+app.use(setTime);
 
-app.get('/', (req, res) => {
-  const start = performance.now();
-  let duration = 0;
-  const message = { msg: 'Root path visited: Hello im root' };
-  const { date, time } = req.timestamp;
-  res.json(message);
-  res.on('finish', () => {
-    const end = performance.now();
-    duration = end - start;
-  });
-  let jsonLog = {
-    log: message.msg,
-    date,
-    time,
-    requestTime: duration,
-  };
-  setLog(jsonLog);
+app.use((req, res, next) => {
+  req.startTime = Date.now();
+  next();
 });
 
-app.get('/create/file/Sync/:fileName', (req, res) => {
-  const start = performance.now();
-  let duration = 0;
-  const fileName = req.params.fileName;
-  const { date, time } = req.timestamp;
-  const message = {};
-  let jsonLog = {};
+app.get('/', (req, res) => {
+  const log = 'Root path visited: Hello im root';
+  res.json({ message: log, success: true });
+  setLog(req, res, log);
+});
+
+app.get('/create/file/sync/:fileName', validateFileName, (req, res) => {
+  const { fileName } = req.params;
   try {
     fs.writeFileSync(
       `./New_Files/${fileName}.txt`,
       'I Am new file,created by using Sync function'
     );
-    message.msg = `${fileName}.txt file created(Sync)`;
-    res.json(message);
-    res.on('finish', () => {
-      const end = performance.now();
-      duration = end - start;
-    });
-    jsonLog = {
-      log: message.msg,
-      date,
-      time,
-      requestTime: `${duration} ms`,
-    };
-    setLog(jsonLog);
+    const log = `${fileName}.txt file created(Sync)`;
+    res.json({ message: log, success: true });
+    setLog(req, res, log);
   } catch (err) {
-    message.msg = 'error creating file (SYNC)';
-    res.json(jsonLog);
-    res.on('end', () => {
-      const end = performance.now();
-      duration = end - start;
-    });
-    jsonLog = {
-      log: message.msg,
-      date,
-      time,
-      requestTime: `${duration} ms`,
-    };
-    setLog(jsonLog);
+    const log = 'error creating file (SYNC)';
+    res.status(500).json({ message: log, success: false });
+    setLog(req, res, log);
   }
 });
 
-app.get('/create/file/Async/:fileName', (req, res) => {
-  const start = performance.now();
-  let duration = 0;
-  const { date, time } = req.timestamp;
-  const fileName = req.params.fileName;
-  const message = {};
-  let jsonLog = {};
+app.get('/create/file/async/:fileName', validateFileName, (req, res) => {
+  const { fileName } = req.params;
   try {
     fs.writeFile(
       `./New_Files/${fileName}.txt`,
       'I Am new file created without using Sync function',
       (err) => {
         if (err) {
-          message.msg = 'error creating file (Async)';
-          res.on('finish', () => {
-            const end = performance.now();
-            duration = end - start;
-            jsonLog = {
-              log: message.msg,
-              date,
-              time,
-              requestTime: `${duration} ms`,
-            };
-          });
-          setLog(jsonLog);
-          return res.json(message);
+          console.log('hi');
+          const log = `error creating ${fileName}.txt file (Async)`;
+          setLog(req, res, log);
+          return res.json({ message: log, success: false });
         }
-        message.msg = 'file created (Async)';
-        res.on('finish', () => {
-          const end = performance.now();
-          duration = end - start;
-        });
-        jsonLog = {
-          log: message.msg,
-          date,
-          time,
-          requestTime: `${duration} ms`,
-        };
-        res.json(jsonLog);
-        setLog(jsonLog);
+        const log = `${fileName}.txt file created (Async)`;
+        res.json({ message: log, success: true });
+        setLog(req, res, log);
       }
     );
   } catch (err) {
-    message.msg = 'error creating file (Async)';
-    res.json(message);
-    res.on('finish', () => {
-      const end = performance.now();
-      duration = end - start;
-    });
-    jsonLog = {
-      log: message.msg,
-      date,
-      time,
-      requestTime: `${duration} ms`,
-    };
-    setLog(jsonLog);
+    const log = `internal server error creating file (Async)`;
+    res.json({ message: log, success: false });
+    setLog(req, res, log);
   }
 });
 
-app.get('/read/file/Sync/:fileName', (req, res) => {
-  const start = performance.now();
-  let duration = 0;
-  const { date, time } = req.timestamp;
-  const message = {};
-  let jsonLog = {};
-  const fileName = req.params.fileName;
+app.get('/read/file/sync/:fileName', validateFileName, (req, res) => {
+  const { fileName } = req.params;
   try {
     const fileData = fs.readFileSync(`./New_Files/${fileName}.txt`, 'utf-8');
-    message.msg = `reading file ${fileName}.txt (Sync) `;
-
-    res.json({ fileData, message });
-    res.on('finish', () => {
-      const end = performance.now();
-      duration = end - start;
-    });
-    jsonLog = {
-      log: message.msg,
-      date,
-      time,
-      requestTime: `${duration} ms`,
-    };
-    setLog(jsonLog);
+    const log = `reading file ${fileName}.txt (Sync) `;
+    res.json({ date: fileData, message: log, success: true });
+    setLog(req, res, log);
   } catch (err) {
-    message.msg = 'internal server error in reading file (Sync)';
-    res.json(message);
-    res.on('finish', () => {
-      const end = performance.now();
-      duration = end - start;
-    });
-    jsonLog = {
-      log: message.msg,
-      date,
-      time,
-      requestTime: `${duration} ms`,
-    };
-    setLog(jsonLog);
+    const log = 'internal server error in reading file (Sync)';
+    res.json({ message: log, success: false });
+    setLog(req, res, log);
   }
 });
 
@@ -433,8 +335,12 @@ app.get('/stream/logs', (req, res) => {
   });
 });
 
+app.use(errorHandler);
+
 app.use((req, res) => {
-  res.status(404).json({ message: 'sorry page not found' });
+  const message = 'sorry page not found, unlisted api visited ';
+  res.status(404).json({ message });
+  setLog(req, res, message);
 });
 
 app.listen(process.env.PORT, () => {

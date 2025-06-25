@@ -1,19 +1,19 @@
-{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"17:22:36"}
-{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"17:24:26"}
-{"message":"reading file (Streams)","date":"21/6/2025","time":"17:43:19"}
-{"message":"reading file (Streams)","date":"21/6/2025","time":"17:44:27"}
-{"message":"logger.jsonl file reading completed","date":"21/6/2025","time":"17:44:27"}
-{"message":"reading file (Streams)","date":"21/6/2025","time":"17:45:14"}
-{"message":"logger.jsonl file reading completed","date":"21/6/2025","time":"17:45:14"}
-{"message":"reading file (Streams)","date":"21/6/2025","time":"17:46:22"}
-{"message":"logger.jsonl.txt file reading completed","date":"21/6/2025","time":"17:46:22"}
-{"message":"crazy.txt file created(Sync)","date":"21/6/2025","time":"17:47:30"}
-{"message":"file created (Async)","date":"21/6/2025","time":"17:48:41"}
-{"message":"reading file crazy.txt (Sync) ","date":"21/6/2025","time":"17:50:17"}
-{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:14:16","responseTime":"0 ms"}
-{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:15:35","responseTime":"0 ms"}
-{"message":"Root path visited: Hello im root","date":"21/6/2025","time":"18:30:26","responseTime":"0 ms"}
-{"log":"Root path visited: Hello im root","date":"21/6/2025","time":"23:48:4","requestTime":0}
-{"log":"Root path visited: Hello im root","date":"22/6/2025","time":"0:7:19","requestTime":0}
-{"message":"test.txt file created(Sync)","date":"22/6/2025","time":"0:24:44","requestTime":"0"}
-{"message":"sage.txt file created(Sync)","date":"22/6/2025","time":"0:26:0","requestTime":"0"}
+{"log":"Root path visited: Hello im root","date":"24/6/2025","time":"19:53:58","responseTime":"2 ms"}
+{"log":"Root path visited: Hello im root","date":"24/6/2025","time":"19:54:58","responseTime":"4 ms"}
+{"log":"Root path visited: Hello im root","date":"24/6/2025","time":"20:15:32","responseTime":"6 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:25:8","responseTime":"4 ms"}
+{"log":"Cannot read properties of undefined (reading 'toString')","date":"24/6/2025","time":"20:25:54","responseTime":"5 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:27:16","responseTime":"5 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:27:28","responseTime":"1 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:27:32","responseTime":"1 ms"}
+{"log":"kuchbhi.txt file created(Sync)","date":"24/6/2025","time":"20:27:56","responseTime":"7 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:28:39","responseTime":"1 ms"}
+{"log":"sorry page not found, unlisted api visited","date":"24/6/2025","time":"20:30:10","responseTime":"4 ms"}
+{"log":"error creating file (Async)","date":"24/6/2025","time":"20:41:40","responseTime":"3 ms"}
+{"log":"error creating file (Async)","date":"24/6/2025","time":"20:42:27","responseTime":"6 ms"}
+{"log":"error creating file (Async)","date":"24/6/2025","time":"20:42:45","responseTime":"11 ms"}
+{"log":"internal server error creating file (Async)","date":"24/6/2025","time":"20:43:26","responseTime":"4 ms"}
+{"log":"aise_he.txt file created (Async)","date":"24/6/2025","time":"20:43:48","responseTime":"4 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:44:24","responseTime":"1 ms"}
+{"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:44:43","responseTime":"1 ms"}
+{"log":"NaN.txt file created (Async)","date":"24/6/2025","time":"20:44:47","responseTime":"3 ms"}

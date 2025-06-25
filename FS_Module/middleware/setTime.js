@@ -1,4 +1,7 @@
-const createLog = (req, res, next) => {
+/*
+ * this setTime middleware set the time and date in the req header. and calls the next
+ */
+export const setTime = (req, res, next) => {
   const time = Date.now();
   const date = new Date(time);
   const day = date.getDate();
@@ -13,5 +16,3 @@ const createLog = (req, res, next) => {
   };
   next();
 };
-
-export default createLog;

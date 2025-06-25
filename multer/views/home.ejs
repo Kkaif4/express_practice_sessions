@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multer and Cors session</title>
+    <title>Multer Error Handling</title>
   </head>
   <body>
     <h1>Upload Single File :</h1>
@@ -14,9 +14,6 @@
     </form>
     <br />
 
-
-
-
     <h1>Upload Array Files :</h1>
     <form action="/upload/array" method="post" enctype="multipart/form-data">
       <label for="photos">Photos</label>
@@ -25,10 +22,6 @@
     </form>
     <br />
 
-
-
-
-
     <h1>Upload Files using Fields :</h1>
     <form action="/upload/fields" method="post" enctype="multipart/form-data">
       <label for="pfp">Profile Picture</label>
@@ -36,7 +29,7 @@
 
       <label for="photos">Photos</label>
       <input type="file" name="photos" multiple />
-      
+
       <button type="submit">Upload</button>
     </form>
   </body>
