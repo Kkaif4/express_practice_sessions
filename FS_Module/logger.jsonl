@@ -17,3 +17,103 @@
 {"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:44:24","responseTime":"1 ms"}
 {"log":"File Name must be string and should now be empty","date":"24/6/2025","time":"20:44:43","responseTime":"1 ms"}
 {"log":"NaN.txt file created (Async)","date":"24/6/2025","time":"20:44:47","responseTime":"3 ms"}
+{"log":"Root path visited: Hello im root","date":"26/6/2025","time":"15:48:53","responseTime":"7 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"15:49:47","responseTime":"1 ms"}
+{"log":"File Name must be string and should now be empty","date":"26/6/2025","time":"15:50:7","responseTime":"4 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:50:21","responseTime":"5 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:52:3","responseTime":"6 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:52:8","responseTime":"1 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:52:42","responseTime":"6 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:53:14","responseTime":"1 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:53:22","responseTime":"15 ms"}
+{"log":"Root path visited: Hello im root","date":"26/6/2025","time":"15:53:46","responseTime":"3 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"15:53:50","responseTime":"1 ms"}
+{"log":"File Name must be string","date":"26/6/2025","time":"15:54:12","responseTime":"1 ms"}
+{"log":"one.txt file created(Sync)","date":"26/6/2025","time":"15:54:23","responseTime":"7 ms"}
+{"log":"123.txt file created(Sync)","date":"26/6/2025","time":"15:54:32","responseTime":"2 ms"}
+{"log":"Cannot destructure property 'data' of 'req.body' as it is undefined.","date":"26/6/2025","time":"16:11:46","responseTime":"4 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:11:57","responseTime":"7 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:12:47","responseTime":"1 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:12:56","responseTime":"1 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"16:14:27","responseTime":"5 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"16:14:39","responseTime":"1 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"16:14:45","responseTime":"0 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"16:14:55","responseTime":"1 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"16:15:32","responseTime":"4 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:16:57","responseTime":"4 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:17:48","responseTime":"1 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:19:30","responseTime":"7 ms"}
+{"log":"Root path visited: Hello im root","date":"26/6/2025","time":"16:22:32","responseTime":"3 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:23:53","responseTime":"1 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:24:14","responseTime":"20 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"16:24:36","responseTime":"10 ms"}
+{"log":"Unexpected token 'u', ...\"   \"data\":undefined\n\"... is not valid JSON","date":"26/6/2025","time":"16:24:48","responseTime":"1 ms"}
+{"log":"data.trim is not a function","date":"26/6/2025","time":"16:25:14","responseTime":"1 ms"}
+{"log":"The \"data\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received type number (1234)","date":"26/6/2025","time":"16:26:0","responseTime":"10 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"16:26:0","responseTime":"11 ms"}
+{"log":"The \"data\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received type number (1234)","date":"26/6/2025","time":"16:26:56","responseTime":"11 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"16:26:56","responseTime":"11 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:27:31","responseTime":"1 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:29:20","responseTime":"10 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:30:26","responseTime":"11 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:31:21","responseTime":"11 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:32:41","responseTime":"11 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:34:9","responseTime":"12 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:36:35","responseTime":"10 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:36:54","responseTime":"9 ms"}
+{"log":"hello.txt file created(Sync)","date":"26/6/2025","time":"16:37:10","responseTime":"11 ms"}
+{"log":"File already exist","date":"26/6/2025","time":"16:37:35","responseTime":"10 ms"}
+{"log":"File already exist, try creating new file","date":"26/6/2025","time":"16:38:8","responseTime":"9 ms"}
+{"log":"hello","date":"26/6/2025","time":"16:38:40","responseTime":"11 ms"}
+{"log":"hello.txt already exist, try creating new file","date":"26/6/2025","time":"16:39:13","responseTime":"11 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"16:50:8","responseTime":"9 ms"}
+{"log":"hello.txt file created (Async)","date":"26/6/2025","time":"16:50:17","responseTime":"1 ms"}
+{"log":"hello.txt file created (Async)","date":"26/6/2025","time":"16:50:38","responseTime":"1 ms"}
+{"log":"fileName is not defined","date":"26/6/2025","time":"16:53:24","responseTime":"9 ms"}
+{"log":"hello.txt already exist, try creating new file","date":"26/6/2025","time":"16:53:55","responseTime":"11 ms"}
+{"log":"newFile.txt file created (Async)","date":"26/6/2025","time":"16:56:59","responseTime":"11 ms"}
+{"log":"newFile.txt file created (Async)","date":"26/6/2025","time":"16:57:19","responseTime":"1 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"17:7:0","responseTime":"10 ms"}
+{"log":"newFile.txt already exist, try creating new file","date":"26/6/2025","time":"17:7:18","responseTime":"10 ms"}
+{"log":"newFile.txt already exist, try creating new file","date":"26/6/2025","time":"17:10:18","responseTime":"9 ms"}
+{"log":"error creating AsyncNewFile.txt file (Async)","date":"26/6/2025","time":"17:10:56","responseTime":"11 ms"}
+{"log":"error creating AsyncNewFile.txt file (Async) ENOENT: no such file or directory, open '../New_Files/AsyncNewFile.txt'","date":"26/6/2025","time":"17:11:50","responseTime":"11 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:15:11","responseTime":"11 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:15:26","responseTime":"2 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:15:56","responseTime":"1 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:17:16","responseTime":"10 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:18:2","responseTime":"14 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:18:22","responseTime":"2 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:18:28","responseTime":"9 ms"}
+{"log":"internal server error in the error handler","date":"26/6/2025","time":"17:18:29","responseTime":"2 ms"}
+{"log":"AsyncFile.txt already exist, try creating new file","date":"26/6/2025","time":"17:21:41","responseTime":"10 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"17:27:32","responseTime":"11 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"17:28:27","responseTime":"10 ms"}
+{"log":"AsyncFile.txt already exist, try creating new file","date":"26/6/2025","time":"17:29:38","responseTime":"11 ms"}
+{"log":"one.txt file not found, try creating new file","date":"26/6/2025","time":"17:32:11","responseTime":"9 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"17:35:57","responseTime":"11 ms"}
+{"log":"Root path visited: Hello im root","date":"26/6/2025","time":"17:38:25","responseTime":"4 ms"}
+{"log":"reading file hello.txt (ASYNC) ","date":"26/6/2025","time":"17:39:16","responseTime":"4 ms"}
+{"log":"cannot read empty file hello.txt","date":"26/6/2025","time":"17:39:33","responseTime":"6 ms"}
+{"log":"cannot read empty file hello.txt","date":"26/6/2025","time":"17:40:2","responseTime":"4 ms"}
+{"log":"cannot read empty file hello.txt","date":"26/6/2025","time":"17:40:4","responseTime":"2 ms"}
+{"log":"reading file hello.txt (ASYNC) ","date":"26/6/2025","time":"17:40:9","responseTime":"1 ms"}
+{"log":"Cannot destructure property 'data' of 'req.body' as it is undefined.","date":"26/6/2025","time":"17:51:17","responseTime":"4 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"17:51:34","responseTime":"5 ms"}
+{"log":"hello.txt file updated successfully (Sync)","date":"26/6/2025","time":"17:51:54","responseTime":"7 ms"}
+{"log":"hello.txt file updated successfully (Sync)","date":"26/6/2025","time":"17:52:59","responseTime":"25 ms"}
+{"log":"hello.txt file updated successfully (Sync)","date":"26/6/2025","time":"17:53:19","responseTime":"1 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"17:53:34","responseTime":"2 ms"}
+{"log":"Unexpected token '}', \"{\n    \"data\": \n}\" is not valid JSON","date":"26/6/2025","time":"17:53:43","responseTime":"1 ms"}
+{"log":"Unexpected token 'u', ...\"  \"data\": undefined\n\"... is not valid JSON","date":"26/6/2025","time":"17:53:47","responseTime":"1 ms"}
+{"log":"trying to write invalid data","date":"26/6/2025","time":"17:53:57","responseTime":"1 ms"}
+{"log":"file hello.txt updated (ASYNC)","date":"26/6/2025","time":"17:57:1","responseTime":"10 ms"}
+{"log":"kyu.txt file not found, try creating new file","date":"26/6/2025","time":"17:58:19","responseTime":"11 ms"}
+{"log":"yewali.txt file not found, try creating new file","date":"26/6/2025","time":"17:58:31","responseTime":"1 ms"}
+{"log":"yewali.txt file not found, try creating new file","date":"26/6/2025","time":"17:58:36","responseTime":"1 ms"}
+{"log":"sorry page not found, unlisted api visited ","date":"26/6/2025","time":"18:5:53","responseTime":"9 ms"}
+{"log":"Invalid file name","date":"26/6/2025","time":"18:17:40","responseTime":"9 ms"}
+{"log":"file hello.txt Deleted","date":"26/6/2025","time":"18:19:47","responseTime":"10 ms"}
+{"log":"hello.txt file not found, try creating new file","date":"26/6/2025","time":"18:19:54","responseTime":"2 ms"}
+{"log":"logger file streaming complete","date":"26/6/2025","time":"18:35:20","responseTime":"9 ms"}
+{"log":"logger file streaming complete","date":"26/6/2025","time":"18:36:2","responseTime":"8 ms"}

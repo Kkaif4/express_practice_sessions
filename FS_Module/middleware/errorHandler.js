@@ -6,9 +6,7 @@
 import { setLog } from '../utils/setLog.js';
 
 export const errorHandler = (err, req, res, next) => {
-  if (err) {
-    const message = err.message || 'internal server error in the error handler';
-    res.status(500).json({ error: message });
-    setLog(req, res, message);
-  }
+  const log = err.message || 'internal server error in the error handler';
+  res.status(500).json({ error: log, success: false });
+  setLog(req, res, log);
 };

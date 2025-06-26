@@ -11,6 +11,7 @@ export const setTime = (req, res, next) => {
   const m = date.getMinutes();
   const s = date.getSeconds();
   req.timestamp = {
+    start: Date.now(),
     date: `${day}/${month + 1}/${year}`,
     time: `${h}:${m}:${s}`,
   };
