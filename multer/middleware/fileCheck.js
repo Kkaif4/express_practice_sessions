@@ -1,7 +1,7 @@
 export const fileCheck = (req, res, next) => {
   console.log(req.file);
   if (!req.file) {
-    return next(new Error('Attachments are required'));
+    return next(new Error('Attachment is required'));
   }
   next();
 };

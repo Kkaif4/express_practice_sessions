@@ -54,11 +54,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload/single', upload.single('pfp'), fileCheck, (req, res) => {
-  return res.json({ message: 'file uploaded' });
+  return res.json({ message: 'file uploaded', success: true });
 });
 
 app.post('/upload/array', upload.array('photos', 4), filesCheck, (req, res) => {
-  return res.json({ message: 'files uploaded' });
+  return res.json({ message: 'files uploaded', success: true });
 });
 
 app.post(
@@ -69,7 +69,7 @@ app.post(
   ]),
   filesCheck,
   (req, res) => {
-    return res.json({ message: 'files uploaded' });
+    return res.json({ message: 'files uploaded', success: true });
   }
 );
 
